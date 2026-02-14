@@ -4,8 +4,7 @@
 
 A modern, feature-rich Todo application built to demonstrate best practices in the React ecosystem. This project was entirely scaffolded, architected, implemented, and refined by Antigravity, an advanced AI coding assistant.
 
-<img width="1094" height="646" alt="image" src="https://github.com/user-attachments/assets/8ac81b5b-8b1c-4abe-b281-79a1d64cfd9b" />
-
+<img width="1061" height="715" alt="image" src="https://github.com/user-attachments/assets/dd3d55de-6b0a-47f6-9332-cbb50fddefe2" />
 
 
 ## ✨ Features
@@ -13,56 +12,58 @@ A modern, feature-rich Todo application built to demonstrate best practices in t
 - **📝 Full CRUD Task Management**: Create, read, update, and delete todos with ease.
 - **🏷️ Rich Metadata**: Organize tasks with **Priorities** (Low, Medium, High) and **Categories** (Work, Personal, Shopping, etc.).
 - **📅 Due Dates**: Set and track due dates for your tasks.
+- **✨ Fluid Animations**: Smooth enter, exit, and list reordering powered by **Framer Motion**.
 - **🔍 Smart Filtering & Search**:
   - Filter by Priority, Category, and Status (Active/Completed).
   - Real-time text search for task titles and descriptions.
 - **🌍 Internationalization (i18n)**:
   - Full support for **English** and **Vietnamese**.
   - Instant language switching with preference persistence.
+- **⚡ Modern Fetching & Mocks**:
+  - Uses React 19 **`use()` hook** and **`<Suspense>`** for granular loading states.
+  - **MSW (Mock Service Worker)** integration for local API development with an in-memory database.
 - **🎨 Modern Theming**:
   - System-aware Light and Dark modes.
-  - Beautiful, accessible UI components.
+  - Beautiful, accessible UI components from **shadcn/ui**.
 - **📱 Responsive Design**: Fully optimized for all device sizes.
 
 ## 🛠️ Tech Stack
 
 - **Core**: [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [Vite](https://vitejs.dev/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **UI Library**: [shadcn/ui](https://ui.shadcn.com/) (Radix UI)
+- **UI & Icons**: [shadcn/ui](https://ui.shadcn.com/), [Lucide React](https://lucide.dev/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Networking & Mocks**: [MSW](https://mswjs.io/), [whatwg-fetch](https://github.com/github/fetch)
 - **State Management**: [Zustand](https://github.com/pmndrs/zustand)
 - **Forms & Validation**: [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
-- **Internationalization**: [i18next](https://www.i18next.com/) + [react-i18next](https://react.i18next.com/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Utilities**: [date-fns](https://date-fns.org/), [clsx](https://github.com/lukeed/clsx), [tailwind-merge](https://github.com/dcastil/tailwind-merge)
+- **Internationalization**: [i18next](https://www.i18next.com/)
+- **Utilities**: [date-fns](https://date-fns.org/), [clsx](https://github.com/lukeed/clsx)
 
 ## 📂 Project Structure
 
 ```
 src/
 ├── components/          # React components
-│   ├── ui/              # Reusable shadcn/ui components (Button, Input, etc.)
+│   ├── ui/              # Reusable shadcn/ui components
 │   ├── language-toggle.tsx
-│   ├── theme-provider.tsx
-│   ├── theme-toggle.tsx
 │   ├── todo-filters.tsx
 │   ├── todo-form.tsx
 │   ├── todo-item.tsx
-│   └── todo-list.tsx
-├── lib/                 # Utilities and configurations
-│   ├── constants.ts     # App constants (priorities, categories)
+│   ├── todo-list.tsx    # Uses React 19 use()
+│   └── todo-skeleton.tsx # Suspense fallback
+├── lib/                 # Utilities and networking
+│   ├── api-client.ts    # Custom fetch wrapper
 │   ├── schemas.ts       # Zod validation schemas
 │   └── utils.ts         # Helper functions
-├── locales/             # Translation files
-│   ├── en/              # English resources
-│   └── vi/              # Vietnamese resources
-├── store/               # Global state management
-│   └── todo-store.ts    # Zustand store
-├── types/               # TypeScript type definitions
-│   ├── index.ts
-│   └── todo.ts
-├── App.tsx              # Main application layout
-├── i18n.ts              # i18n configuration
-└── main.tsx             # Application entry point
+├── locales/             # Translation files (EN/VI)
+├── mocks/               # MSW Mock Server
+│   ├── browser.ts       # Worker setup
+│   ├── db.ts            # In-memory database
+│   └── handlers.ts      # API route handlers
+├── store/               # Zustand store (Async actions)
+├── types/               # TypeScript definitions
+├── App.tsx              # Application layout & Suspense boundaries
+└── main.tsx             # Entry point & MSW initialization
 ```
 
 ## 🚀 Getting Started
