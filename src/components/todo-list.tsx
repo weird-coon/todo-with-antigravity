@@ -1,12 +1,19 @@
+import { use } from "react";
 import { useTranslation } from "react-i18next";
 import { ClipboardList } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { useFilteredTodos } from "@/store/todo-store";
+import { useTodoStore, useFilteredTodos } from "@/store/todo-store";
 import { TodoItem } from "@/components/todo-item";
 
 export function TodoList() {
   const { t } = useTranslation();
+  const todosPromise = useTodoStore((s) => s.todosPromise);
+
+  if (todosPromise) {
+    use(todosPromise);
+  }
+
   const todos = useFilteredTodos();
 
   if (todos.length === 0) {

@@ -4,6 +4,7 @@
     "done_count": "{{completed}}/{{total}} xong"
   },
   "button": {
+    "add": "Thêm",
     "add_todo": "Thêm công việc",
     "save_changes": "Lưu thay đổi",
     "cancel": "Hủy",

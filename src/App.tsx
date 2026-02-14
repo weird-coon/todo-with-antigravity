@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useTranslation } from "react-i18next";
-import { Plus, CheckCircle2 } from "lucide-react";
+import { Plus } from "lucide-react";
 
 import { useTodoStore } from "@/store/todo-store";
 import type { TodoFormValues } from "@/lib/schemas";
@@ -10,6 +10,7 @@ import { LanguageToggle } from "@/components/language-toggle";
 import { TodoForm } from "@/components/todo-form";
 import { TodoFilters } from "@/components/todo-filters";
 import { TodoList } from "@/components/todo-list";
+import { TodoSkeleton } from "@/components/todo-skeleton";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +25,7 @@ import {
 export default function App() {
   const { t } = useTranslation();
   const [addOpen, setAddOpen] = useState(false);
+
   const addTodo = useTodoStore((s) => s.addTodo);
   const todoCount = useTodoStore((s) => s.todos.length);
   const completedCount = useTodoStore(
@@ -47,7 +49,7 @@ export default function App() {
       <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-2xl items-center justify-between px-4">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-5 w-5 text-primary" />
+            <img src="/images/logo.svg" alt="Todo App Logo" className="h-6 w-6" />
             <h1 className="text-lg font-semibold tracking-tight">
               {t("app.title")}
             </h1>
@@ -63,7 +65,7 @@ export default function App() {
           <div className="flex items-center gap-2">
             <Dialog open={addOpen} onOpenChange={setAddOpen}>
               <DialogTrigger asChild>
-                <Button size="sm" className="gap-2">
+                <Button variant="success" size="sm" className="gap-2">
                   <Plus className="h-4 w-4" />
                   {t("button.add_todo")}
                 </Button>
@@ -78,7 +80,7 @@ export default function App() {
                 <TodoForm
                   onSubmit={handleAdd}
                   onCancel={() => setAddOpen(false)}
-                  submitLabel={t("button.add_todo")}
+                  submitLabel={t("button.add")}
                 />
               </DialogContent>
             </Dialog>
@@ -92,7 +94,9 @@ export default function App() {
       <main className="mx-auto max-w-2xl px-4 py-6">
         <TodoFilters />
         <Separator className="my-4" />
-        <TodoList />
+        <Suspense fallback={<TodoSkeleton />}>
+          <TodoList />
+        </Suspense>
       </main>
     </div>
   );

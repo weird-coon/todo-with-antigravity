@@ -10,5 +10,5 @@ export interface Todo {
   category: Category;
   dueDate?: Date;
   completed: boolean;
-  createdAt: Date;
+  createdAt: Date | string;
 }

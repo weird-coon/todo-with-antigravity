@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { create } from "zustand";
-import { v4 as uuidv4 } from "uuid";
 import type { Todo, Priority, Category } from "@/types";
+import { apiClient } from "@/lib/api-client";
 
 export type FilterStatus = "all" | "active" | "completed";
 
@@ -11,59 +11,96 @@ interface TodoState {
   filterPriority: Priority | "all";
   filterCategory: Category | "all";
   filterStatus: FilterStatus;
+  isLoading: boolean;
+  error: string | null;
+  todosPromise: Promise<Todo[]>;
 
   // Actions
-  addTodo: (todo: Omit<Todo, "id" | "createdAt" | "completed">) => void;
+  fetchTodos: () => Promise<void>;
+  addTodo: (todo: Omit<Todo, "id" | "createdAt" | "completed">) => Promise<void>;
   updateTodo: (
     id: string,
     updates: Partial<Omit<Todo, "id" | "createdAt">>,
-  ) => void;
-  deleteTodo: (id: string) => void;
-  toggleTodo: (id: string) => void;
+  ) => Promise<void>;
+  deleteTodo: (id: string) => Promise<void>;
+  toggleTodo: (id: string) => Promise<void>;
   setSearchQuery: (query: string) => void;
   setFilterPriority: (priority: Priority | "all") => void;
   setFilterCategory: (category: Category | "all") => void;
   setFilterStatus: (status: FilterStatus) => void;
 }
 
-export const useTodoStore = create<TodoState>((set) => ({
+export const useTodoStore = create<TodoState>((set, get) => ({
   todos: [],
   searchQuery: "",
   filterPriority: "all",
   filterCategory: "all",
   filterStatus: "all",
+  isLoading: false,
+  error: null,
+  todosPromise: null as any,
 
-  addTodo: (todo) =>
-    set((state) => ({
-      todos: [
-        {
-          ...todo,
-          id: uuidv4(),
-          completed: false,
-          createdAt: new Date(),
-        },
-        ...state.todos,
-      ],
-    })),
+  fetchTodos: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const promise = apiClient.get<Todo[]>("/api/todos");
+      set({ todosPromise: promise });
+      const todos = await promise;
+      set({ todos, isLoading: false });
+    } catch (err: any) {
+      set({ error: err.message, isLoading: false });
+    }
+  },
 
-  updateTodo: (id, updates) =>
-    set((state) => ({
-      todos: state.todos.map((todo) =>
-        todo.id === id ? { ...todo, ...updates } : todo,
-      ),
-    })),
+  addTodo: async (todo) => {
+    set({ isLoading: true, error: null });
+    try {
+      const newTodo = await apiClient.post<Todo>("/api/todos", todo);
+      set((state) => ({ todos: [newTodo, ...state.todos], isLoading: false }));
+    } catch (err: any) {
+      set({ error: err.message, isLoading: false });
+    }
+  },
 
-  deleteTodo: (id) =>
-    set((state) => ({
-      todos: state.todos.filter((todo) => todo.id !== id),
-    })),
+  updateTodo: async (id, updates) => {
+    try {
+      const updatedTodo = await apiClient.patch<Todo>(`/api/todos/${id}`, updates);
+      set((state) => ({
+        todos: state.todos.map((todo) =>
+          todo.id === id ? updatedTodo : todo,
+        ),
+      }));
+    } catch (err: any) {
+      set({ error: err.message });
+    }
+  },
 
-  toggleTodo: (id) =>
-    set((state) => ({
-      todos: state.todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-      ),
-    })),
+  deleteTodo: async (id) => {
+    try {
+      await apiClient.delete(`/api/todos/${id}`);
+      set((state) => ({
+        todos: state.todos.filter((todo) => todo.id !== id),
+      }));
+    } catch (err: any) {
+      set({ error: err.message });
+    }
+  },
+
+  toggleTodo: async (id) => {
+    const todo = get().todos.find((t) => t.id === id);
+    if (!todo) return;
+
+    try {
+      const updatedTodo = await apiClient.patch<Todo>(`/api/todos/${id}`, {
+        completed: !todo.completed,
+      });
+      set((state) => ({
+        todos: state.todos.map((t) => (t.id === id ? updatedTodo : t)),
+      }));
+    } catch (err: any) {
+      set({ error: err.message });
+    }
+  },
 
   setSearchQuery: (searchQuery) => set({ searchQuery }),
   setFilterPriority: (filterPriority) => set({ filterPriority }),

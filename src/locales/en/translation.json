@@ -4,6 +4,7 @@
     "done_count": "{{completed}}/{{total}} done"
   },
   "button": {
+    "add": "Add",
     "add_todo": "Add Todo",
     "save_changes": "Save Changes",
     "cancel": "Cancel",
