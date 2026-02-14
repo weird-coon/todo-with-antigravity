@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Trash2 } from "lucide-react";
 import { format } from "date-fns";
 
 import { useTodoFormSchema, type TodoFormValues } from "@/lib/schemas";
@@ -65,6 +65,8 @@ export function TodoForm({
   const priorityValue = watch("priority");
   const categoryValue = watch("category");
 
+  const [calendarOpen, setCalendarOpen] = useState(false);
+
   useEffect(() => {
     if (defaultValues) {
       reset({
@@ -100,6 +102,7 @@ export function TodoForm({
         <Input
           id="title"
           placeholder={t("form.title_placeholder")}
+          maxLength={100}
           {...register("title")}
           className={cn(errors.title && "border-destructive")}
         />
@@ -175,7 +178,7 @@ export function TodoForm({
       {/* Due Date */}
       <div className="space-y-2">
         <Label>{t("form.due_date")}</Label>
-        <Popover>
+        <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
           <PopoverTrigger asChild>
             <Button
               type="button"
@@ -195,12 +198,13 @@ export function TodoForm({
             <Calendar
               mode="single"
               selected={dueDateValue}
-              onSelect={(date) =>
+              onSelect={(date) => {
                 setValue("dueDate", date ?? undefined, {
                   shouldValidate: true,
-                })
-              }
-              initialFocus
+                });
+                setCalendarOpen(false);
+              }}
+              autoFocus
             />
           </PopoverContent>
         </Popover>
@@ -213,6 +217,7 @@ export function TodoForm({
             onClick={() => setValue("dueDate", undefined)}
           >
             {t("form.clear_date")}
+            <Trash2 className="h-3 w-3" />
           </Button>
         )}
       </div>

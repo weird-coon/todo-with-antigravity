@@ -24,7 +24,9 @@
     "pick_date": "Pick a date",
     "clear_date": "Clear date",
     "header_add": "New Todo",
-    "header_edit": "Edit Todo"
+    "description_add": "Fill in the details for your new todo item.",
+    "header_edit": "Edit Todo",
+    "description_edit": "Make changes to your todo item here."
   },
   "filter": {
     "search_placeholder": "Search todos...",
@@ -54,6 +56,7 @@
   "validation": {
     "title_required": "Title is required",
     "title_max": "Title must be 100 characters or less",
+    "title_pattern": "Only letters, numbers, spaces, dots, and commas allowed",
     "description_max": "Description must be 500 characters or less"
   },
   "theme": {

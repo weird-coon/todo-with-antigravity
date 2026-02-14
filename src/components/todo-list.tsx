@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { ClipboardList } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { useFilteredTodos } from "@/store/todo-store";
 import { TodoItem } from "@/components/todo-item";
@@ -22,9 +23,20 @@ export function TodoList() {
 
   return (
     <div className="space-y-2">
-      {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
-      ))}
+      <AnimatePresence mode="popLayout">
+        {todos.map((todo) => (
+          <motion.div
+            key={todo.id}
+            layout
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, x: 50 }}
+            transition={{ duration: 0.2 }}
+          >
+            <TodoItem todo={todo} />
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </div>
   );
 }

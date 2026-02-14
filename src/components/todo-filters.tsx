@@ -71,7 +71,7 @@ export function TodoFilters() {
           value={filterPriority}
           onValueChange={(v) => setFilterPriority(v as Priority | "all")}
         >
-          <SelectTrigger className="w-[130px]">
+          <SelectTrigger className="w-[160px]">
             <SelectValue placeholder={t("form.priority_placeholder")} />
           </SelectTrigger>
           <SelectContent>
@@ -88,7 +88,7 @@ export function TodoFilters() {
           value={filterCategory}
           onValueChange={(v) => setFilterCategory(v as Category | "all")}
         >
-          <SelectTrigger className="w-[130px]">
+          <SelectTrigger className="w-[160px]">
             <SelectValue placeholder={t("form.category_placeholder")} />
           </SelectTrigger>
           <SelectContent>
@@ -105,7 +105,7 @@ export function TodoFilters() {
           value={filterStatus}
           onValueChange={(v) => setFilterStatus(v as FilterStatus)}
         >
-          <SelectTrigger className="w-[130px]">
+          <SelectTrigger className="w-[160px]">
             <SelectValue placeholder={t("filter.status")} />
           </SelectTrigger>
           <SelectContent>

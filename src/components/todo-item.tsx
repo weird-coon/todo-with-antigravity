@@ -18,6 +18,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { TodoForm } from "@/components/todo-form";
 
@@ -48,22 +49,21 @@ export function TodoItem({ todo }: TodoItemProps) {
     <>
       <Card
         className={cn(
-          "group relative flex items-start gap-3 p-4 transition-all hover:shadow-md",
+          "group relative flex flex-row items-start gap-4 p-4 transition-all hover:shadow-md",
           todo.completed && "opacity-60",
         )}
       >
-        <Checkbox
-          checked={todo.completed}
-          onCheckedChange={() => toggleTodo(todo.id)}
-          className="mt-1 shrink-0"
-          aria-label={`Mark "${todo.title}" as ${todo.completed ? "incomplete" : "complete"}`}
-        />
-
-        <div className="min-w-0 flex-1 space-y-1.5">
+        <div className="min-w-0 flex-1 space-y-2">
           <div className="flex items-center gap-2">
+            <Checkbox
+              checked={todo.completed}
+              onCheckedChange={() => toggleTodo(todo.id)}
+              className="shrink-0"
+              aria-label={`Mark "${todo.title}" as ${todo.completed ? "incomplete" : "complete"}`}
+            />
             <span
               className={cn(
-                "text-sm font-medium leading-tight",
+                "text-sm font-medium leading-tight break-word",
                 todo.completed && "line-through text-muted-foreground",
               )}
             >
@@ -111,7 +111,7 @@ export function TodoItem({ todo }: TodoItemProps) {
         </div>
 
         {/* Actions – visible on hover */}
-        <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+        <div className="flex shrink-0 gap-1">
           <Button
             variant="ghost"
             size="icon"
@@ -138,6 +138,9 @@ export function TodoItem({ todo }: TodoItemProps) {
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>{t("form.header_edit")}</DialogTitle>
+            <DialogDescription>
+              {t("form.description_edit")}
+            </DialogDescription>
           </DialogHeader>
           <TodoForm
             defaultValues={todo}

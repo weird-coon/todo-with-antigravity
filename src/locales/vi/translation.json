@@ -24,7 +24,9 @@
     "pick_date": "Chọn ngày",
     "clear_date": "Xóa ngày",
     "header_add": "Công việc mới",
-    "header_edit": "Sửa công việc"
+    "description_add": "Nhập chi tiết cho công việc mới của bạn.",
+    "header_edit": "Sửa công việc",
+    "description_edit": "Thay đổi thông tin công việc tại đây."
   },
   "filter": {
     "search_placeholder": "Tìm kiếm...",
@@ -54,6 +56,7 @@
   "validation": {
     "title_required": "Tiêu đề là bắt buộc",
     "title_max": "Tiêu đề phải ít hơn 100 ký tự",
+    "title_pattern": "Chỉ cho phép chữ cái, số, khoảng trắng, dấu chấm, phẩy",
     "description_max": "Mô tả phải ít hơn 500 ký tự"
   },
   "theme": {

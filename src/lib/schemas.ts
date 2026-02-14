@@ -8,7 +8,10 @@ export const useTodoFormSchema = () => {
     title: z
       .string()
       .min(1, t("validation.title_required"))
-      .max(100, t("validation.title_max")),
+      .regex(
+        /^[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵýỷỹ\s.,]*$/,
+        t("validation.title_pattern"),
+      ),
     description: z
       .string()
       .max(500, t("validation.description_max"))

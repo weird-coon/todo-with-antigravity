@@ -63,6 +63,9 @@ function DialogContent({
           className,
         )}
         {...props}
+        onInteractOutside={(e) => {
+          e.preventDefault();
+        }}
       >
         {children}
         {showCloseButton && (

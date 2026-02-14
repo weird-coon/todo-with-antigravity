@@ -18,6 +18,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogDescription,
 } from "@/components/ui/dialog";
 
 export default function App() {
@@ -59,10 +60,10 @@ export default function App() {
               </span>
             )}
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <Dialog open={addOpen} onOpenChange={setAddOpen}>
               <DialogTrigger asChild>
-                <Button size="sm" className="gap-1.5">
+                <Button size="sm" className="gap-2">
                   <Plus className="h-4 w-4" />
                   {t("button.add_todo")}
                 </Button>
@@ -70,6 +71,9 @@ export default function App() {
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>
                   <DialogTitle>{t("form.header_add")}</DialogTitle>
+                  <DialogDescription>
+                    {t("form.description_add")}
+                  </DialogDescription>
                 </DialogHeader>
                 <TodoForm
                   onSubmit={handleAdd}
