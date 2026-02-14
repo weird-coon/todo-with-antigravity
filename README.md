@@ -4,6 +4,9 @@
 
 A modern, feature-rich Todo application built to demonstrate best practices in the React ecosystem. This project was entirely scaffolded, architected, implemented, and refined by Antigravity, an advanced AI coding assistant.
 
+<img width="832.5" height="658.5" alt="image" src="https://github.com/user-attachments/assets/43572916-0005-430a-85b5-f677d0888c7e" />
+
+
 ## ✨ Features
 
 - **📝 Full CRUD Task Management**: Create, read, update, and delete todos with ease.
