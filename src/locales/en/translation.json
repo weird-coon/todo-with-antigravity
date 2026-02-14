@@ -1,0 +1,65 @@
+{
+  "app": {
+    "title": "Todo App",
+    "done_count": "{{completed}}/{{total}} done"
+  },
+  "button": {
+    "add_todo": "Add Todo",
+    "save_changes": "Save Changes",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "clear_filters": "Clear filters"
+  },
+  "form": {
+    "title": "Title",
+    "title_placeholder": "What needs to be done?",
+    "description": "Description",
+    "description_placeholder": "Optional details...",
+    "priority": "Priority",
+    "priority_placeholder": "Select priority",
+    "category": "Category",
+    "category_placeholder": "Select category",
+    "due_date": "Due Date",
+    "pick_date": "Pick a date",
+    "clear_date": "Clear date",
+    "header_add": "New Todo",
+    "header_edit": "Edit Todo"
+  },
+  "filter": {
+    "search_placeholder": "Search todos...",
+    "priority_all": "All Priorities",
+    "category_all": "All Categories",
+    "status": "Status",
+    "status_all": "All",
+    "status_active": "Active",
+    "status_completed": "Completed"
+  },
+  "empty_state": {
+    "title": "No todos found",
+    "description": "Add a new todo or adjust your filters."
+  },
+  "priority": {
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High"
+  },
+  "category": {
+    "work": "Work",
+    "personal": "Personal",
+    "shopping": "Shopping",
+    "health": "Health",
+    "other": "Other"
+  },
+  "validation": {
+    "title_required": "Title is required",
+    "title_max": "Title must be 100 characters or less",
+    "description_max": "Description must be 500 characters or less"
+  },
+  "theme": {
+    "toggle_label": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  }
+}

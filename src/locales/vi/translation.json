@@ -1,0 +1,65 @@
+{
+  "app": {
+    "title": "Ứng dụng Todo",
+    "done_count": "{{completed}}/{{total}} xong"
+  },
+  "button": {
+    "add_todo": "Thêm công việc",
+    "save_changes": "Lưu thay đổi",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Sửa",
+    "clear_filters": "Xóa bộ lọc"
+  },
+  "form": {
+    "title": "Tiêu đề",
+    "title_placeholder": "Cần làm gì?",
+    "description": "Mô tả",
+    "description_placeholder": "Chi tiết tùy chọn...",
+    "priority": "Độ ưu tiên",
+    "priority_placeholder": "Chọn độ ưu tiên",
+    "category": "Danh mục",
+    "category_placeholder": "Chọn danh mục",
+    "due_date": "Ngày hết hạn",
+    "pick_date": "Chọn ngày",
+    "clear_date": "Xóa ngày",
+    "header_add": "Công việc mới",
+    "header_edit": "Sửa công việc"
+  },
+  "filter": {
+    "search_placeholder": "Tìm kiếm...",
+    "priority_all": "Tất cả độ ưu tiên",
+    "category_all": "Tất cả danh mục",
+    "status": "Trạng thái",
+    "status_all": "Tất cả",
+    "status_active": "Đang hoạt động",
+    "status_completed": "Đã hoàn thành"
+  },
+  "empty_state": {
+    "title": "Không tìm thấy công việc nào",
+    "description": "Thêm công việc mới hoặc điều chỉnh bộ lọc."
+  },
+  "priority": {
+    "low": "Thấp",
+    "medium": "Trung bình",
+    "high": "Cao"
+  },
+  "category": {
+    "work": "Công việc",
+    "personal": "Cá nhân",
+    "shopping": "Mua sắm",
+    "health": "Sức khỏe",
+    "other": "Khác"
+  },
+  "validation": {
+    "title_required": "Tiêu đề là bắt buộc",
+    "title_max": "Tiêu đề phải ít hơn 100 ký tự",
+    "description_max": "Mô tả phải ít hơn 500 ký tự"
+  },
+  "theme": {
+    "toggle_label": "Chuyển đổi giao diện",
+    "light": "Sáng",
+    "dark": "Tối",
+    "system": "Hệ thống"
+  }
+}
